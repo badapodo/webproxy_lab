@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<head>
+  <title>Adder</title>
+</head>
+<body>
+  <h1>Adder (SSR 요청)</h1>
+  <form id="ssrForm">
+    <input id="n1" type="text" placeholder="First number">
+    <input id="n2" type="text" placeholder="Second number">
+    <button type="submit">SSR 계산</button>
+  </form>
+  <hr>
+  <h2>또는 CSR 계산</h2>
+  <form id="csrForm">
+    <input id="n3" type="text" placeholder="First number">
+    <input id="n4" type="text" placeholder="Second number">
+    <button type="submit">CSR 계산</button>
+  </form>
+  <p id="csrResult"></p>
+
+  <script>
+    // SSR용
+    document.getElementById("ssrForm").onsubmit = function(e) {
+      e.preventDefault();
+      const n1 = document.getElementById("n1").value;
+      const n2 = document.getElementById("n2").value;
+      const url = `/ssr_adder?n1=${encodeURIComponent(n1)}&n2=${encodeURIComponent(n2)}`;
+      window.location.href = url;  // 이동
+    };
+
+    // CSR용
+    document.getElementById("csrForm").onsubmit = function(e) {
+      e.preventDefault();
+      const n3 = parseInt(document.getElementById("n3").value);
+      const n4 = parseInt(document.getElementById("n4").value);
+      document.getElementById("csrResult").innerText = `${n3} + ${n4} = ${n3 + n4}`;
+    };
+  </script>
+</body>
+</html>
